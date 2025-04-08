@@ -12,8 +12,6 @@ const Home = () => {
     setUploadImage(URL.createObjectURL(file));
     setIsLoading(true);
 
-    // invoke api here
-
     try {
       const enhancedUrl = await enhancedImageAPI(file);
       setEnhancedImage(enhancedUrl);
@@ -24,15 +22,18 @@ const Home = () => {
       alert("Something went wrong. Please try again.");
     }
   };
+
   return (
-    <>
-      <ImageUpload uploadImageHandler={uploadImageHandler} />
-      <ImagePreview
-        loading={isLoading}
-        uploaded={uploadImage}
-        enhanced={enhancedImage?.image}
-      />
-    </>
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-300px)]">
+      <div className="w-full max-w-4xl mx-auto">
+        <ImageUpload uploadImageHandler={uploadImageHandler} />
+        <ImagePreview
+          loading={isLoading}
+          uploaded={uploadImage}
+          enhanced={enhancedImage?.image}
+        />
+      </div>
+    </div>
   );
 };
 

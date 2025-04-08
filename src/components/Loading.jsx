@@ -2,9 +2,12 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <article className="flex items-center justify-center h-full">
-      <div className="size-10 rounded-full border-2 border-t-transparent border-emerald-300 scale-150 animate-spin"></div>
-    </article>
+    <div className="flex flex-col items-center gap-4">
+      <div className="size-12 rounded-full border-4 border-blue-500/30 border-t-blue-500 animate-spin" />
+      <p className="text-sm text-gray-400 animate-pulse">
+        Enhancing your image...
+      </p>
+    </div>
   );
 };
 
