@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_KEY = "wx1rqdy3f3c5wytin";
-const BASE_URL = "https://techhk.aoscdn.com";
+const API_KEY = import.meta.env.VITE_API_KEY;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const enhancedImageAPI = async (file) => {
   try {
@@ -14,12 +14,11 @@ export const enhancedImageAPI = async (file) => {
     return enhancedImageData;
   } catch (error) {
     console.log("Error enhancing image", error);
-    throw error; // Re-throw to allow caller to handle
+    throw error; // Re-throw to allow the caller to handle the error
   }
 };
 
 const uploadImage = async (file) => {
-  // code to upload image
   const formData = new FormData();
   formData.append("image_file", file);
 
@@ -37,11 +36,10 @@ const uploadImage = async (file) => {
   if (!data?.data?.task_id)
     throw new Error("Failed to upload image, Task ID not found");
 
-  return data.data.task_id; // Changed from taskId to task_id
+  return data.data.task_id;
 };
 
 const fetchEnhancedImage = async (taskId) => {
-  // code to fetch enhanced image
   if (!taskId) {
     throw new Error("Task ID is undefined");
   }
@@ -76,7 +74,6 @@ const pollForEnhancedImage = async (taskId, retries = 0) => {
     if (retries >= 20)
       throw new Error("Max retries reached. Please try again later.");
 
-    // wait for 2 second
     await new Promise((resolve) => setTimeout(resolve, 2000));
     return pollForEnhancedImage(taskId, retries + 1);
   }
